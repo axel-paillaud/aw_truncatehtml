@@ -50,7 +50,7 @@ class Aw_TruncateHtml extends Module
     public static function truncateHtml($text, $length = 100, $ellipsis = '...')
     {
         require_once(__DIR__ . '/truncatehtml.php');
-        return TruncateHtml::truncate($text, $length, $ellipsis);
+        return TruncateHtml::truncate($text, $length, $ellipsis, true);
     }
 }
 

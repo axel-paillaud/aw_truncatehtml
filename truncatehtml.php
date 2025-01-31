@@ -19,7 +19,7 @@
 
 class TruncateHtml
 {
-    public static function truncate($text, $length = 100, $ellipsis = '...')
+    public static function truncate($text, $length = 100, $ellipsis = '...', $cutAfterWord = true)
     {
         if (mb_strlen(strip_tags($text)) <= $length) {
             return $text;
@@ -47,7 +47,16 @@ class TruncateHtml
 
                 if ($totalLength + mb_strlen($plainText) > $length) {
                     $remaining = $length - $totalLength;
-                    $truncated .= mb_substr($plainText, 0, $remaining) . $ellipsis;
+
+                    if ($cutAfterWord) {
+                        // Cut the last word
+                        $words = explode(' ', mb_substr($plainText, 0, $remaining));
+                        array_pop($words); // Remove the last word
+                        $truncated .= implode(' ', $words) . $ellipsis;
+                    } else {
+                        $truncated .= mb_substr($plainText, 0, $remaining) . $ellipsis;
+                    }
+
                     break;
                 }
 
@@ -59,4 +68,3 @@ class TruncateHtml
         return $truncated;
     }
 }
-
