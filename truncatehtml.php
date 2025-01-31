@@ -54,6 +54,7 @@ class TruncateHtml
                         array_pop($words); // Remove the last word
                         $truncated .= implode(' ', $words) . $ellipsis;
                     } else {
+                        // Cut the text at the exact length
                         $truncated .= mb_substr($plainText, 0, $remaining) . $ellipsis;
                     }
 
